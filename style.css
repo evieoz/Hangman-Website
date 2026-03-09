@@ -1,3 +1,47 @@
 body {
-    
+  background-color: #fff8f0;
+font-family: "amster", serif;
+font-weight: 400;
+font-style: italic;
+}
+
+
+h1 {
+  color: #d6336c;
+  font-family: "comba", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin: 20px 0;
+}
+
+#wordDisplay {
+  font-size: 2rem;
+  letter-spacing: 12px;
+}
+
+#guessedLetters {
+  color: #3f2f1c;
+}
+
+#mistakes {
+  color: red;
+  font-weight: bold;
+}
+
+#message {
+  font-size: 1.5rem;
+}
+
+#message.lose {
+  color: red;
+}
+
+.tree-img {
+  width: 200px;
+  height: auto;
+  margin-top: 20px;
+}
+
+button {
+  margin: 5px;
 }

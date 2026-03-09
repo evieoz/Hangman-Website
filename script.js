@@ -17,26 +17,24 @@ let selectedWord = "";
 let displayedWord = "";
 let wrongGuesses = 0;
 let guessedLetters = [];
-const maxMistakes = 6;
+let maxMistakes = 6;
 let level = "easy"; // default difficulty
 let gameActive = false;
 
 // Start Game
-function startGame(level) {
+function startGame(selectedLevel) {
+  level = selectedLevel;
   wrongGuesses = 0;
   guessedLetters = [];
   gameActive = true;
 
-  // max mistakes based on difficulty
+  // Max mistakes based on difficulty
   if (level === "easy") maxMistakes = 8;
   else if (level === "medium") maxMistakes = 6;
   else if (level === "hard") maxMistakes = 4;
 
   selectedWord = getRandomWord();
-  displayedWord = "";
-  for (let i = 0; i < selectedWord.length; i++) {
-    displayedWord += "_";
-  }
+  displayedWord = "_".repeat(selectedWord.length);
 
   updateDifficultyDisplay(level);
   updateUI();
@@ -82,28 +80,42 @@ function updateUI() {
     `Mistakes: ${wrongGuesses} / ${maxMistakes}`;
 }
 
+// Update tree image based on wrong guesses (used google to look up how to change image source)
+function updateTreeImage() {
+  const tree = document.getElementById("tree");
+  let imgNumber = Math.min(6, Math.max(0, wrongGuesses));
+  imgNumber = Math.round((wrongGuesses / maxMistakes) * 6);
+  tree.src = `img/tree${6 - imgNumber}.png`; 
+}
+
+
 // Guess letter (used google for the a-z logic)
 function guessLetter() {
+  if (!gameActive) return;
+
   const input = document.getElementById("letterInput");
   const letter = input.value.toLowerCase();
   input.value = "";
+
   if (letter.length !== 1 || !/[a-z]/.test(letter)) {
     alert("Please enter a valid letter (a-z).");
     return;
   }
+
   if (guessedLetters.includes(letter)) {
     alert("You already guessed that letter!");
     return;
   }
-  // Used push from our code academy lessons and used google to incorporate it into the game logic
+  // (Used push from our code academy lessons and used google to incorporate it into the game logic)
   guessedLetters.push(letter);
+
   if (selectedWord.includes(letter)) {
     let newDisplayedWord = "";
     for (let i = 0; i < selectedWord.length; i++) {
-      if (selectedWord[i] === letter) {
+      if (selectedWord.charAt(i) === letter) {
         newDisplayedWord += letter;
       } else {
-        newDisplayedWord += displayedWord[i];
+        newDisplayedWord += displayedWord.charAt(i);
       }
     }
     displayedWord = newDisplayedWord;
@@ -112,4 +124,31 @@ function guessLetter() {
   }
   updateUI();
   updateTreeImage();
+  checkWinLose();
 }
+
+// Check win or lose
+function checkWinLose() {
+    const message = document.getElementById("message");
+    if (!displayedWord.includes("_")) {
+        message.textContent = "Congratulations! You Win!";
+        gameActive = false;
+    } else if (wrongGuesses >= maxMistakes) {
+        message.textContent = `Game Over! The word was: ${selectedWord}`;
+        gameActive = false;
+    }
+}
+
+// Restart Game
+function restartGame() {
+    gameActive = false;
+    startGame(level);
+}
+
+// Enter key to submit guess (used google to use e key for the enter key logic)
+document.getElementById("letterInput").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        guessLetter();
+    }
+});
+
