@@ -80,12 +80,12 @@ function updateUI() {
     `Mistakes: ${wrongGuesses} / ${maxMistakes}`;
 }
 
-// Update tree image based on wrong guesses (used google to look up how to change image source)
+// Update tree image based on wrong guesses (used google to look up math functions to calculate and the image changes)
 function updateTreeImage() {
   const tree = document.getElementById("tree");
   let imgNumber = Math.min(6, Math.max(0, wrongGuesses));
   imgNumber = Math.round((wrongGuesses / maxMistakes) * 6);
-  tree.src = `img/tree${6 - imgNumber}.png`; 
+  tree.src = `tree${6 - imgNumber}.png`;
 }
 
 

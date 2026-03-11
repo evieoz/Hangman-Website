@@ -1,47 +1,180 @@
 body {
-  background-color: #fff8f0;
-font-family: "amster", serif;
-font-weight: 400;
-font-style: italic;
+  background: linear-gradient(#ffeef6, #ff98c5);\
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 20px;
+  font-family: "amster", serif;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
 }
 
-
 h1 {
-  color: #d6336c;
   font-family: "comba", sans-serif;
   font-weight: 700;
   font-style: normal;
   margin: 20px 0;
+  color:#cc2c6f;
+  font-size:3rem;
+  text-shadow:2px 2px #ffc1d9;
+}
+
+#difficultySelection{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0px 6px 15px rgba(0, 0, 0, 0.62);
+    width:350px;
+    margin:auto;
+}
+
+#difficultyBox{
+    width:200px;
+    margin:auto;
+    border-radius:10px;
+    font-size:18px;
 }
 
 #wordDisplay {
   font-size: 2rem;
   letter-spacing: 12px;
+  color:#cc2c6f;
+  transition: all 0.3s ease;
 }
 
-#guessedLetters {
-  color: #3f2f1c;
+#wordDisplay:hover{
+    text-shadow:
+        0 0 10px #ff7fb0,
+        0 0 20px #ff7fb0,
+        0 0 30px #ffb3d1;
+    transition: all 0.3s ease;
+}
+
+#letterInput{
+    width:70px;
+    text-align:center;
+    font-size:20px;
+    border-radius:8px;
+    transition: all 0.3s ease;
+}
+
+#letterInput:hover{
+    transform: scale(1.08);
+    border:2px solid #ff7fb0;
+    transition: all 0.3s ease;
+}
+
+#letterInput:focus{
+    outline:none;
+    box-shadow:0 0 10px #ff7fb0;
+}
+
+#guessBtn{
+    background:#ff7fb0;
+    border:none;
+    color:white;
+    font-weight:bold;
+}
+
+#guessBtn:hover{
+    background:#ff5a9a;
+}
+
+#guessedLetters{
+    font-size:18px;
+    color:#444;
 }
 
 #mistakes {
-  color: red;
+  font-size:18px;
   font-weight: bold;
 }
 
 #message {
-  font-size: 1.5rem;
-}
+    font-size:24px;
+    font-weight:bold;
+    margin-top:10px;}
 
 #message.lose {
   color: red;
 }
 
 .tree-img {
-  width: 200px;
+  width:400px;
+  margin-top:25px;
   height: auto;
-  margin-top: 20px;
+  border-radius:12px;
+  transition: transform 0.3s ease;
 }
 
-button {
-  margin: 5px;
+.tree-img:hover{
+    transform: rotate(-2deg) scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.restart-btn {
+  background: #ff7fb0;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+
+button{
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+  transition: all 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  background-color: #ff468a !important;
+  color: white !important;
+}
+
+.btn-outline-success:hover{
+    background:#9dffa0;
+    color:white;
+    box-shadow:0 0 12px #59a15c;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-warning:hover{
+    background:#ffeaac;
+    color:white;
+    box-shadow:0 0 12px #ffdd76;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-danger:hover{
+    background:#ff7d8a;
+    color:white;
+    box-shadow:0 0 12px #cd535f;
+    transition: all 0.3s ease;
 }
