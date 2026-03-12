@@ -142,7 +142,19 @@ function checkWinLose() {
 // Restart Game
 function restartGame() {
     gameActive = false;
-    startGame(level);
+    document.getElementById("gameArea").classList.add("d-none");
+    document.getElementById("difficultySelection").classList.remove("d-none");
+    document.getElementById("difficultyBox").classList.add("d-none");
+    document.getElementById("message").textContent = "";
+    displayedWord = "";
+    guessedLetters = [];
+    wrongGuesses = 0;
+    document.getElementById("wordDisplay").textContent = "";
+    document.getElementById("guessedLetters").textContent = "";
+    document.getElementById("mistakes").textContent = "";
+    const tree = document.getElementById("tree");
+    tree.src = "tree6.png";
+
 }
 
 // Enter key to submit guess (used google to use e key for the enter key logic)
