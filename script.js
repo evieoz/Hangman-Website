@@ -1,4 +1,5 @@
-// Word List
+// Word List 
+// list of possible words in the game 
 const wordList = [
   "cherry",
   "tree",
@@ -12,16 +13,24 @@ const wordList = [
   "sunshine",
 ];
 
-// Variables
+// Variables 
+// the word the game randomly chooses to be guessed
 let selectedWord = "";
+// shows what letters have been guessed and underscores for letters not yet guessed
 let displayedWord = "";
+// counts how many wrong guesses the player has made
 let wrongGuesses = 0;
+// keeps track of letters player has guessed so far
 let guessedLetters = [];
+// maximum wrong guesses allowed based on difficulty level
 let maxMistakes = 6;
-let level = "easy"; // default difficulty
+// current difficulty level, default is easy
+let level = "easy"; 
+// whether game is currently running true is if game is running and false if over or not begun
 let gameActive = false;
 
 // Start Game
+// pick difficulty level
 function startGame(selectedLevel) {
   level = selectedLevel;
   wrongGuesses = 0;
@@ -32,7 +41,7 @@ function startGame(selectedLevel) {
   if (level === "easy") maxMistakes = 8;
   else if (level === "medium") maxMistakes = 6;
   else if (level === "hard") maxMistakes = 4;
-
+// chooses random word from word list and sets displayed word with underscores
   selectedWord = getRandomWord();
   displayedWord = "_".repeat(selectedWord.length);
 
@@ -49,11 +58,13 @@ function startGame(selectedLevel) {
 }
 
 // Get Random Word
+// picks a random word from the word list array so the game is different each time 
 function getRandomWord() {
   return wordList[Math.floor(Math.random() * wordList.length)];
 }
 
-// Difficulty display
+// Difficulty display]
+// makes the difficulty box show the current difficulty level and changes color based on the level, easy is green, medium is yellow, and hard is red, this gives players a visual of the difficulty they have selected.
 function updateDifficultyDisplay(level) {
   const difficultyBox = document.getElementById("difficultyBox");
   difficultyBox.classList.remove("easy", "medium", "hard");
@@ -70,6 +81,7 @@ function updateDifficultyDisplay(level) {
 }
 
 // Update UI (used google to look up how to split and join strings with spaces)
+// any time a player guesses this will update what is displayed on the screen
 function updateUI() {
   document.getElementById("wordDisplay").textContent = displayedWord
     .split("")
@@ -81,6 +93,7 @@ function updateUI() {
 }
 
 // Update tree image based on wrong guesses (used google to look up math functions to calculate and the image changes)
+// wrong guesses affect the cherries on the tree, as wrong guesses increase the cherries disappear until the tree is bare at 6 wrong guesses, the image updates accordingly to show the state of the tree.
 function updateTreeImage() {
   const tree = document.getElementById("tree");
   let imgNumber = Math.min(6, Math.max(0, wrongGuesses));
@@ -90,9 +103,10 @@ function updateTreeImage() {
 
 
 // Guess letter (used google for the a-z logic)
+// Checks if game is active
 function guessLetter() {
   if (!gameActive) return;
-
+// gets letter player typed in and converts to lowercase and clears input field for next guess
   const input = document.getElementById("letterInput");
   const letter = input.value.toLowerCase();
   input.value = "";
@@ -110,6 +124,7 @@ function guessLetter() {
   }
 
   // (Used push from our code academy lessons and used google to incorporate it into the game logic)
+  // adds letter to guessed letters array and checks if it is in the selected word, if it is it updates the displayed word, if not it increments wrong guesses
   guessedLetters.push(letter);
 
   if (selectedWord.includes(letter)) {
@@ -130,7 +145,7 @@ function guessLetter() {
   checkWinLose();
 }
 
-// Check win or lose
+// Check win or lose this ends the game and shows message based on the outcome, 
 function checkWinLose() {
     const message = document.getElementById("message");
     if (!displayedWord.includes("_")) {
@@ -142,7 +157,7 @@ function checkWinLose() {
     }
 }
 
-// Restart Game
+// Restart Game to difficulty screen so player can start new game
 function restartGame() {
     gameActive = false;
     document.getElementById("gameArea").classList.add("d-none");
