@@ -96,16 +96,19 @@ function guessLetter() {
   const input = document.getElementById("letterInput");
   const letter = input.value.toLowerCase();
   input.value = "";
-
+// checking if input is valid for letter in alphabet and only one character, used regex for this validation
+  message.textContent = "";
   if (letter.length !== 1 || !/[a-z]/.test(letter)) {
-    alert("Please enter a valid letter (a-z).");
+    message.textContent = "Please enter a valid letter (a-z).";
     return;
   }
 
+// checking if the letter has been guessed before 
   if (guessedLetters.includes(letter)) {
-    alert("You already guessed that letter!");
+    message.textContent = "You already guessed that letter!";
     return;
   }
+
   // (Used push from our code academy lessons and used google to incorporate it into the game logic)
   guessedLetters.push(letter);
 
